@@ -1,0 +1,7 @@
+{
+  "name": "Pictoclone",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
