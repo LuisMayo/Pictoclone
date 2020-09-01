@@ -1,0 +1,16 @@
+<ion-content>
+  <ion-item>
+    <ion-label>Username</ion-label>
+    <ion-input [(ngModel)]="settings.username" [disabled]="this.settings.logged"></ion-input>
+    <ion-button *ngIf="!this.settings.logged; else logout" (click)="login()">Login</ion-button>
+    <ng-template #logout>
+      <ion-button (click)="this.settings.logged = false">Logout</ion-button>
+    </ng-template>
+  </ion-item>
+  <ion-list *ngIf="this.settings.logged">
+    <a routerLink="/room/0">Chat Room A</a>
+    <a routerLink="/room/1">Chat Room B</a>
+    <a routerLink="/room/2">Chat Room C</a>
+    <a routerLink="/room/3">Chat Room D</a>
+  </ion-list>
+</ion-content>

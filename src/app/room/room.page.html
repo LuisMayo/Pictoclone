@@ -1,0 +1,22 @@
+<ion-content>
+  <div class="cont">
+    <ion-list>
+      <ng-container *ngFor="let message of history">
+        <ng-container [ngSwitch]="message.type">
+          <ng-container *ngSwitchCase="'service'">
+            <div>{{message.text}}</div>
+          </ng-container>
+          <ng-container *ngSwitchCase="'normal'">
+            <img [src]="message.img"/>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </ion-list>
+    <app-canvas #canvas></app-canvas>
+    <ion-buttons>
+      <ion-button (click)="sendCanvas()">Send</ion-button>
+      <ion-button (click)="copyCanvas()">Copy</ion-button>
+      <ion-button (click)="clearCanvas()">Clear</ion-button>
+    </ion-buttons>
+  </div>
+</ion-content>
