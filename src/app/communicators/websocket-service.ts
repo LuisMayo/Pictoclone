@@ -10,11 +10,11 @@ import { SettingsService } from '../services/settings.service';
 export class WebsocketService implements CommunicationService {
     static instance: WebsocketService;
     socket: WebSocket;
-    onError: Subject<string>;
-    onRoomInfo: Subject<RoomInfo | RoomInfo[]>;
-    onClientJoin: Subject<string>;
-    onClientLeave: Subject<string>;
-    onMessage: Subject<Message>;
+    onError: Subject<string> = new Subject();
+    onRoomInfo: Subject<RoomInfo | RoomInfo[]> = new Subject();
+    onClientJoin: Subject<string> = new Subject();
+    onClientLeave: Subject<string> = new Subject();
+    onMessage: Subject<Message> = new Subject();
     connectPromise: DeferredPromise<boolean>;
     joinPromise: DeferredPromise<boolean>;
     static getInstance(settings: SettingsService) {
@@ -55,7 +55,7 @@ export class WebsocketService implements CommunicationService {
                     this.onClientJoin.next(data.username);
                     break;
                 case 'client_message':
-                    this.onMessage.next(data.image);
+                    this.onMessage.next({img: data.image, user: data.username});
                     break;
                 case 'client_leave':
                     this.onClientLeave.next(data.username);
@@ -67,7 +67,7 @@ export class WebsocketService implements CommunicationService {
         const username = localStorage.getItem('username');
         const data = {
             event: 'join',
-            room: room,
+            room,
             username: this.settings.username
         };
         this.socket.send(JSON.stringify(data));
@@ -86,7 +86,6 @@ export class WebsocketService implements CommunicationService {
     connect(username: string): Promise<boolean> {
         const checkUsername = {event: 'check_username', username};
         this.socket.send(JSON.stringify(checkUsername));
-        this.socket.send(username);
         this.connectPromise = new DeferredPromise();
         return this.connectPromise;
     }

@@ -5,21 +5,21 @@ import { Injectable } from '@angular/core';
 })
 export class AudioPlayerService {
 
-  private clientJoin = new Audio('/assets/client_join.mp3');
-  private clientLeave = new Audio('/assets/client_leave.mp3');
-  private clientMessage = new Audio('/assets/client_message.mp3');
-  private copy = new Audio('/assets/copy.mp3');
-  private delete = new Audio('/assets/copy.mp3');
-  private error = new Audio('/assets/error.mp3');
-  private join = new Audio('/assets/join.mp3');
-  private keydown = new Audio('/assets/keydown.mp3');
-  private keyup = new Audio('/assets/keyup.mp3');
-  private leave = new Audio('/assets/leave.mp3');
-  private selectEraser = new Audio('/assets/select_eraser.mp3');
-  private selectPen = new Audio('/assets/select_pen.mp3');
-  private selectPenLarge = new Audio('/assets/select_pen_large.mp3');
-  private selectPenSmall = new Audio('/assets/select_pen_small.mp3');
-  private send = new Audio('/assets/send.mp3');
+  private clientJoin = new Audio('/assets/sounds/client_join.mp3');
+  private clientLeave = new Audio('/assets/sounds/client_leave.mp3');
+  private clientMessage = new Audio('/assets/sounds/client_message.mp3');
+  private copy = new Audio('/assets/sounds/copy.mp3');
+  private delete = new Audio('/assets/sounds/copy.mp3');
+  private error = new Audio('/assets/sounds/error.mp3');
+  private join = new Audio('/assets/sounds/join.mp3');
+  private keydown = new Audio('/assets/sounds/keydown.mp3');
+  private keyup = new Audio('/assets/sounds/keyup.mp3');
+  private leave = new Audio('/assets/sounds/leave.mp3');
+  private selectEraser = new Audio('/assets/sounds/select_eraser.mp3');
+  private selectPen = new Audio('/assets/sounds/select_pen.mp3');
+  private selectPenLarge = new Audio('/assets/sounds/select_pen_large.mp3');
+  private selectPenSmall = new Audio('/assets/sounds/select_pen_small.mp3');
+  private send = new Audio('/assets/sounds/send.mp3');
 
   constructor() { }
   playClientJoin() {

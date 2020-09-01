@@ -7,7 +7,9 @@
             <div>{{message.text}}</div>
           </ng-container>
           <ng-container *ngSwitchCase="'normal'">
-            <img [src]="message.img"/>
+            <div> {{message.user}}
+              <img [src]="message.img"/>
+            </div>
           </ng-container>
         </ng-container>
       </ng-container>
