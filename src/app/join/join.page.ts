@@ -11,6 +11,7 @@ import { CommunicationService } from '../communicators/communication-service';
 export class JoinPage implements OnInit {
 
   communicator: CommunicationService;
+  users: number[] = [];
 
   constructor(public settings: SettingsService, private factory: FactoryService) { }
 
@@ -20,6 +21,14 @@ export class JoinPage implements OnInit {
 
   login() {
     this.communicator.connect(this.settings.username).then(() => this.settings.logged = true);
+    this.communicator.onRoomInfo.subscribe(info => {
+      if (!Array.isArray(info)) {
+        info = [info];
+      }
+      for (const inf of info) {
+        this.users[inf.id] = inf.users;
+      }
+    });
   }
 
 }

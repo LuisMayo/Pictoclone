@@ -8,9 +8,9 @@
     </ng-template>
   </ion-item>
   <ion-list *ngIf="this.settings.logged">
-    <a routerLink="/room/A">Chat Room A</a>
-    <a routerLink="/room/B">Chat Room B</a>
-    <a routerLink="/room/C">Chat Room C</a>
-    <a routerLink="/room/D">Chat Room D</a>
+    <div><a routerLink="/room/A">Chat Room A ({{users['A']}}/16)</a></div>
+    <div><a routerLink="/room/B">Chat Room B ({{users['B']}}/16)</a></div>
+    <div><a routerLink="/room/C">Chat Room C ({{users['C']}}/16)</a></div>
+    <div><a routerLink="/room/D">Chat Room D ({{users['D']}}/16)</a></div>
   </ion-list>
 </ion-content>
