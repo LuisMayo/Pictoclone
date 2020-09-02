@@ -1,3 +1,4 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ca607676-cb53-47c3-9080-912e2951847f/deploy-status)](https://app.netlify.com/sites/pictoclone/deploys)
 # Pictoclone (Early WIP)
 Ionic app which aims to serve as a as-close-as-possible clone of the Nintendo DS' app "Pictochat" in which users chat with drawings
 Intended for mobile devices.
