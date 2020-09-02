@@ -58,6 +58,7 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "baseHref": "/pictoclone/",
               "budgets": [
                 {
                   "type": "initial",
@@ -78,8 +79,7 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "app:build:production",
-              "baseHref": "/pictoclone/"
+              "browserTarget": "app:build:production"
             },
             "ci": {
               "progress": false
