@@ -78,7 +78,8 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "app:build:production"
+              "browserTarget": "app:build:production",
+              "baseHref": "/pictoclone/"
             },
             "ci": {
               "progress": false
