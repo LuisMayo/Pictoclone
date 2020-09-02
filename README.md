@@ -21,7 +21,7 @@ npm i
 ```
 
 Deploy a live server
-`ionic serve`
+`npm start`
 
 
 ## Contributing
