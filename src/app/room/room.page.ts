@@ -27,7 +27,6 @@ export class RoomPage implements OnInit, AfterViewInit, AfterViewChecked {
   communicator: CommunicationService;
   room: string;
   supportedColors = ['green', 'blue', 'orange', 'yellow', 'pink'];
-  needScroll = false;
 
   constructor(
     private factory: FactoryService,
@@ -50,8 +49,8 @@ export class RoomPage implements OnInit, AfterViewInit, AfterViewChecked {
     });
     this.communicator.onMessage.subscribe(msg => {
       this.history.push({ type: 'normal', img: msg.img, user: msg.user });
-      this.needScroll = true;
       this.player.playClientMessage();
+      this.autoScroll();
     });
   }
 
@@ -60,10 +59,6 @@ export class RoomPage implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    if (this.needScroll) {
-      this.bottom.nativeElement.scrollIntoView();
-      this.needScroll = false;
-    }
     this.hiddenInput.nativeElement.focus();
   }
 
@@ -96,9 +91,18 @@ export class RoomPage implements OnInit, AfterViewInit, AfterViewChecked {
     this.player.playSend();
     this.history.push({ type: 'normal', img: this.canvas.canvasEl.toDataURL(), user: this.settings.username });
     this.clearCanvas();
+    this.autoScroll();
   }
 
+
   // Canvas
+
+  private autoScroll() {
+    setTimeout(() => {
+      this.bottom.nativeElement.scrollIntoView({behavior: 'smooth'});
+    }, 10);
+  }
+
 
   getColorForUserName(name: string) {
     return this.supportedColors[name.length % this.supportedColors.length];
