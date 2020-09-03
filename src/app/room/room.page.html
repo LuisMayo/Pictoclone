@@ -1,6 +1,6 @@
-<ion-content>
+<ion-content [scrollY]="false">
   <div class="cont">
-    <ion-list>
+    <ion-list class="scrollable list">
       <ng-container *ngFor="let message of history">
         <ng-container [ngSwitch]="message.type">
           <ng-container *ngSwitchCase="'service'">
