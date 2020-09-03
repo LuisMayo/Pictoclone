@@ -58,7 +58,6 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "baseHref": "/pictoclone/",
               "budgets": [
                 {
                   "type": "initial",
