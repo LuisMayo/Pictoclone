@@ -33,6 +33,7 @@ export class CanvasComponent implements AfterViewInit {
     this.cx.lineWidth = 3;
     this.cx.lineCap = 'round';
     this.cx.strokeStyle = '#000';
+    this.cx.font = '32px classic-pixel';
 
     this.captureEvents(this.canvasEl);
   }
@@ -116,7 +117,6 @@ export class CanvasComponent implements AfterViewInit {
   }
 
   public resetCanvas() {
-    this.cx.fillStyle = 'white';
-    this.cx.fillRect(0, 0, this.width, this.height);
+    this.cx.clearRect(0, 0, this.width, this.height);
   }
 }

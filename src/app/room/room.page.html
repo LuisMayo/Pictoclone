@@ -8,19 +8,25 @@
           </ng-container>
           <ng-container *ngSwitchCase="'normal'">
             <!-- +2 is a consequence of the border width -->
-            <div style="max-width: {{canvasWidth + 2}}px" class="msg {{getColorForUserName(message.user)}}"> 
+            <div [ngStyle]="{'max-width.px': canvasWidth + 2}" class="msg {{getColorForUserName(message.user)}}"> 
               <div class="msg-name">{{message.user}}</div>
               <img [src]="message.img"/>
             </div>
           </ng-container>
         </ng-container>
+        <div #bottom></div>
       </ng-container>
     </ion-list>
-    <app-canvas #canvas [width]="canvasWidth" [height]="canvasHeight"></app-canvas>
+    <div class="canvas-container" [ngStyle]="{'width.px': canvasWidth + 2, 'height.px': canvasHeight + 2}">
+      <app-canvas #canvasLetters [width]="canvasWidth" [height]="canvasHeight"></app-canvas>
+      <app-canvas #canvas class="floating-canvas" [width]="canvasWidth" [height]="canvasHeight"></app-canvas>
+    </div>
     <ion-buttons>
       <ion-button (click)="sendCanvas()">Send</ion-button>
       <ion-button (click)="copyCanvas()">Copy</ion-button>
-      <ion-button (click)="clearCanvas()">Clear</ion-button>
+      <ion-button (click)="btnClearCanvas()">Clear</ion-button>
     </ion-buttons>
   </div>
 </ion-content>
+
+<input style="position: absolute; top: -100px;" #hiddenInput [(ngModel)]="this.writtenText" (keydown)="typeTextIntoCanvas()"/>
