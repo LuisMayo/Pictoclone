@@ -17,7 +17,7 @@ export class RoomPage implements OnInit {
 
   @ViewChild('canvas') canvas: CanvasComponent;
 
-  canvasWidth = 200;
+  canvasWidth = 350;
   canvasHeight = 100;
   history: Message[] = [];
   communicator: CommunicationService;
