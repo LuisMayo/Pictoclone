@@ -7,14 +7,16 @@
             <div>{{message.text}}</div>
           </ng-container>
           <ng-container *ngSwitchCase="'normal'">
-            <div> {{message.user}}
+            <!-- +2 is a consequence of the border width -->
+            <div style="max-width: {{canvasWidth + 2}}px" class="msg {{getColorForUserName(message.user)}}"> 
+              <div class="msg-name">{{message.user}}</div>
               <img [src]="message.img"/>
             </div>
           </ng-container>
         </ng-container>
       </ng-container>
     </ion-list>
-    <app-canvas #canvas></app-canvas>
+    <app-canvas #canvas [width]="canvasWidth" [height]="canvasHeight"></app-canvas>
     <ion-buttons>
       <ion-button (click)="sendCanvas()">Send</ion-button>
       <ion-button (click)="copyCanvas()">Copy</ion-button>

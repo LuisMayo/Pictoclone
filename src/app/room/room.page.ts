@@ -17,9 +17,12 @@ export class RoomPage implements OnInit {
 
   @ViewChild('canvas') canvas: CanvasComponent;
 
+  canvasWidth = 200;
+  canvasHeight = 100;
   history: Message[] = [];
   communicator: CommunicationService;
   room: string;
+  supportedColors = ['green', 'blue', 'orange', 'yellow', 'pink'];
 
   constructor(
     private factory: FactoryService,
@@ -46,12 +49,7 @@ export class RoomPage implements OnInit {
     });
   }
 
-  sendCanvas() {
-    this.communicator.sendMessage(this.canvas.canvasEl.toDataURL());
-    this.player.playSend();
-    this.history.push({ type: 'normal', img: this.canvas.canvasEl.toDataURL(), user: this.settings.username });
-    this.canvas.resetCanvas();
-  }
+  // Canvas
 
   clearCanvas() {
     this.player.playDelete();
@@ -65,6 +63,19 @@ export class RoomPage implements OnInit {
       this.canvas.cx.drawImage(img, 0, 0); // Or at whatever offset you like
     };
     img.src = this.history[this.history.length - 1].img;
+  }
+
+  sendCanvas() {
+    this.communicator.sendMessage(this.canvas.canvasEl.toDataURL());
+    this.player.playSend();
+    this.history.push({ type: 'normal', img: this.canvas.canvasEl.toDataURL(), user: this.settings.username });
+    this.canvas.resetCanvas();
+  }
+
+  // Canvas
+
+  getColorForUserName(name: string) {
+    return this.supportedColors[name.length % this.supportedColors.length];
   }
 
 }

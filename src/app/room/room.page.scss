@@ -7,3 +7,43 @@
 .list {
     flex: 1;
 }
+
+.green {
+    --msg-color: rgb(65, 129, 113);
+    --msg-color-alpha: rgba(65, 129, 113, 0.3);
+}
+
+.blue {
+    --msg-color: rgb(58, 93, 149);
+    --msg-color-alpha: rgba(58, 93, 149, 0.3);
+}
+
+.orange {
+    --msg-color: rgb(158, 93, 65);
+    --msg-color-alpha: rgba(158, 93, 65, 0.3);
+}
+
+.yellow {
+    --msg-color: rgb(247, 253, 121);
+    --msg-color-alpha: rgba(247, 253, 121, 0.3);
+}
+
+.pink {
+    --msg-color: rgb(144, 57, 91);
+    --msg-color-alpha: rgba(144, 57, 91, 0.3);
+}
+
+.msg {
+    border: 1px var(--msg-color) solid;
+    border-radius: 10px;
+}
+
+.msg-name {
+    border-bottom: var(--msg-color) 1px solid;
+    border-right: var(--msg-color) 1px solid;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: var(--msg-color-alpha);
+    width: fit-content;
+
+}
