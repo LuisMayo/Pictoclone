@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked, AfterViewIn
 import { FactoryService } from '../communicators/factory.service';
 import { CommunicationService } from '../communicators/communication-service';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { Message } from './message';
 import { AudioPlayerService } from '../services/audio-player.service';
 import { CanvasComponent } from './canvas/canvas.component';
@@ -27,13 +27,15 @@ export class RoomPage implements OnInit, AfterViewInit, AfterViewChecked {
   communicator: CommunicationService;
   room: string;
   supportedColors = ['green', 'blue', 'orange', 'yellow', 'pink'];
+  isMobile: boolean;
 
   constructor(
     private factory: FactoryService,
     private route: ActivatedRoute,
     private ionicNavigator: NavController,
     private player: AudioPlayerService,
-    private settings: SettingsService) { }
+    private settings: SettingsService,
+    private plt: Platform) { }
 
   ngOnInit() {
     this.communicator = this.factory.getCommunicator();
@@ -52,6 +54,7 @@ export class RoomPage implements OnInit, AfterViewInit, AfterViewChecked {
       this.player.playClientMessage();
       this.autoScroll();
     });
+    this.isMobile = this.plt.is('mobile') || this.plt.is('mobileweb') || this.plt.is('phablet') || this.plt.is('tablet');
   }
 
   ngAfterViewInit() {
@@ -59,6 +62,12 @@ export class RoomPage implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
+    if (!this.isMobile) {
+      this.enableTextInput();
+    }
+  }
+
+  enableTextInput() {
     this.hiddenInput.nativeElement.focus();
   }
 
@@ -86,7 +95,7 @@ export class RoomPage implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   sendCanvas() {
-    this.canvas.cx.drawImage(this.canvasLetters.canvasEl, 0 , 0);
+    this.canvas.cx.drawImage(this.canvasLetters.canvasEl, 0, 0);
     this.communicator.sendMessage(this.canvas.canvasEl.toDataURL());
     this.player.playSend();
     this.history.push({ type: 'normal', img: this.canvas.canvasEl.toDataURL(), user: this.settings.username });
@@ -99,7 +108,7 @@ export class RoomPage implements OnInit, AfterViewInit, AfterViewChecked {
 
   private autoScroll() {
     setTimeout(() => {
-      this.bottom.nativeElement.scrollIntoView({behavior: 'smooth'});
+      this.bottom.nativeElement.scrollIntoView({ behavior: 'smooth' });
     }, 10);
   }
 

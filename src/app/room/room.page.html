@@ -25,6 +25,7 @@
       <ion-button (click)="sendCanvas()">Send</ion-button>
       <ion-button (click)="copyCanvas()">Copy</ion-button>
       <ion-button (click)="btnClearCanvas()">Clear</ion-button>
+      <ion-button *ngIf="isMobile" (click)="enableTextInput()">Open keyboard</ion-button>
     </ion-buttons>
   </div>
 </ion-content>
