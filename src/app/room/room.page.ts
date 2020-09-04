@@ -21,7 +21,7 @@ export class RoomPage implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild('bottom') bottom: ElementRef<HTMLDivElement>;
 
   canvasWidth = 350;
-  canvasHeight = 100;
+  canvasHeight = 150;
   writtenText = '';
   history: Message[] = [];
   communicator: CommunicationService;
