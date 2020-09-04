@@ -2,7 +2,7 @@
 # Pictoclone (Early WIP)
 Ionic app which aims to serve as a as-close-as-possible clone of the Nintendo DS' app "Pictochat" in which users chat with drawings
 Intended for mobile devices.
-Live on https://pictoclone.netlify.app/join
+Live on https://pictoclone.netlify.app/
 
 It's planned to support 3 connection methods, (W)LAN, Bluetooth and WebSockets. Currently only a Websockets version is working using code and server extracted from https://github.com/monowii/pictochat. ¡Huge thanks from here!
 
