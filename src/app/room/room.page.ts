@@ -109,7 +109,7 @@ export class RoomPage implements OnInit, AfterViewInit, AfterViewChecked {
   private autoScroll() {
     setTimeout(() => {
       this.bottom.nativeElement.scrollIntoView({ behavior: 'smooth' });
-    }, 10);
+    }, 50);
   }
 
 
