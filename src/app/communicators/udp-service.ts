@@ -20,7 +20,7 @@ export class UdpService implements CommunicationService {
     interval: NodeJS.Timeout;
 
     socketId: number;
-    // Map<string, {lastSeen: number}>
+    clientsMap: Map<string, number> = new Map();
     static getInstance(settings: SettingsService) {
         if (!this.instance) {
             this.instance = new UdpService(settings);
@@ -39,8 +39,8 @@ export class UdpService implements CommunicationService {
 
     async sendMessage(canvas: string): Promise<boolean> {
         try {
-            const payload = JSON.stringify({room: this.settings.currentRoom, img: canvas});
-            const answer = await UdpPlugin.send({address: '255.255.255.255', port: 19321, buffer: payload, socketId: this.socketId});
+            const payload = JSON.stringify({room: this.settings.currentRoom, username: this.settings.username, img: canvas});
+            await UdpPlugin.send({address: '255.255.255.255', port: 19321, buffer: payload, socketId: this.socketId});
             return true;
         } catch {
             return false;
@@ -56,7 +56,7 @@ export class UdpService implements CommunicationService {
     }
     async join(room: string): Promise<boolean> {
         this.interval = setInterval(() => {
-            const payload = JSON.stringify({room: this.settings.currentRoom});
+            const payload = JSON.stringify({room: this.settings.currentRoom, username: this.settings.username});
             UdpPlugin.send({address: '255.255.255.255', port: 19321, buffer: payload, socketId: this.socketId});
         }, 500);
         try {
