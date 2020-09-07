@@ -40,6 +40,7 @@ export class RoomPage implements OnInit, AfterViewInit, AfterViewChecked {
   ngOnInit() {
     this.communicator = this.factory.getCommunicator();
     this.room = this.route.snapshot.paramMap.get('id');
+    this.settings.currentRoom = this.room;
     this.communicator.join(this.room).catch(e => this.ionicNavigator.navigateRoot('/'));
     this.communicator.onClientJoin.subscribe(username => {
       this.history.push({ type: 'service', text: `Now entering [${this.room}]: ${username}` });
