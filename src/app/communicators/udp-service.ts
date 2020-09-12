@@ -17,10 +17,10 @@ export class UdpService implements CommunicationService {
     onClientJoin: Subject<string>;
     onClientLeave: Subject<string>;
     onMessage: Subject<Message>;
-    interval: NodeJS.Timeout;
+    beaconInterval: NodeJS.Timeout;
 
     socketId: number;
-    clientsMap: Map<string, number> = new Map();
+    clientsMap: Map<string, {user: string, lastSeen: number}[]> = new Map();
     static getInstance(settings: SettingsService) {
         if (!this.instance) {
             this.instance = new UdpService(settings);
@@ -29,11 +29,22 @@ export class UdpService implements CommunicationService {
     }
 
     constructor(private settings: SettingsService) {
+        this.addAllHandlers();
     }
 
     addAllHandlers() {
         UdpPlugin.addListener('receive', data => {
-            // yourArrayBuffer = UdpPluginUtils.stringToBuffer(data)
+            const payload = JSON.parse(data.buffer);
+            if (!this.clientsMap.has(payload.room)) {
+                this.clientsMap.set(payload.room, []);
+            }
+            const clients = this.clientsMap.get(payload.room);
+            const client = clients.find(item => item.user === payload.username) || {user: payload.username, lastSeen: null};
+            client.lastSeen = Date.now();
+            this.onRoomInfo.next({id: payload.room, users: clients.length});
+            if (payload.room === this.settings.currentRoom) {
+                this.onMessage.next({img: payload.img, user: payload.username});
+            }
         });
     }
 
@@ -55,7 +66,7 @@ export class UdpService implements CommunicationService {
         }
     }
     async join(room: string): Promise<boolean> {
-        this.interval = setInterval(() => {
+        this.beaconInterval = setInterval(() => {
             const payload = JSON.stringify({room: this.settings.currentRoom, username: this.settings.username});
             UdpPlugin.send({address: '255.255.255.255', port: 19321, buffer: payload, socketId: this.socketId});
         }, 500);
@@ -67,7 +78,7 @@ export class UdpService implements CommunicationService {
         }
     }
     async disconnect(username: string): Promise<boolean> {
-        clearInterval(this.interval);
+        clearInterval(this.beaconInterval);
         try {
             await UdpPlugin.closeAllSockets();
             return true;
