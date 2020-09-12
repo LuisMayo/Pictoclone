@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SettingsService {
-  communicationType = 'ws';
+  communicationType = 'udp';
   server = 'wss://apps.luismayo.com/pictochat/';
   username = 'test';
   logged = false;
